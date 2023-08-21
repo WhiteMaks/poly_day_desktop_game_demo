@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class NoiseSettings
 {
+    public FilterType filterType;
+    public Vector3 center;
     public float strength = 1;
     public float baseRoughness = 1;
     public float roughness = 2;
@@ -12,6 +14,5 @@ public class NoiseSettings
     public int numOfLayers = 1;
     public float persistence = 0.5f;
     public float minValue;
-    public Vector3 center;
-
+    public float weightMultiplier = 0.8f;
 }

@@ -12,7 +12,7 @@ public class ShapeGenerator {
         noiseFilters = new NoiseFilter[shapeSettings.noiseLayers.Length];
 
         for (int i = 0; i < shapeSettings.noiseLayers.Length; i++) {
-            noiseFilters[i] = new NoiseFilter(
+            noiseFilters[i] = NoiseFilterFactory.CreateNoiseFilter(
                 shapeSettings.noiseLayers[i].noiseSettings
             );
         }
