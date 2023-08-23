@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShapeGenerator {
+    private MinMax elevation;
     private ShapeSettings shapeSettings;
     private NoiseFilter[] noiseFilters;
 
-    public ShapeGenerator(ShapeSettings shapeSettings) {
+    public void UpdateSettings(ShapeSettings shapeSettings) {
         this.shapeSettings = shapeSettings;
 
         noiseFilters = new NoiseFilter[shapeSettings.noiseLayers.Length];
+        elevation = new MinMax();
 
         for (int i = 0; i < shapeSettings.noiseLayers.Length; i++) {
             noiseFilters[i] = NoiseFilterFactory.CreateNoiseFilter(
@@ -39,6 +41,14 @@ public class ShapeGenerator {
             }
         }
 
-        return pointOnSphere * shapeSettings.planetRadius * (1 + evaluationNoise);
+        evaluationNoise = shapeSettings.planetRadius * (1 + evaluationNoise);
+
+        elevation.AddValue(evaluationNoise);
+        
+        return pointOnSphere * evaluationNoise;
+    }
+
+    public MinMax GetElevation() {
+        return elevation;
     }
 }
