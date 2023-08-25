@@ -5,6 +5,7 @@ using UnityEngine;
 public class InputHandler : MonoBehaviour
 {
     private PlayerControls playerControls;
+    private CameraHandler cameraHandler;
     private Vector2 movementInput;
     private Vector2 cameraInput;
 
@@ -13,6 +14,21 @@ public class InputHandler : MonoBehaviour
     public float moveAmount;
     public float mouseX;
     public float mouseY;
+
+    private void Awake() {
+        cameraHandler = CameraHandler.cameraHandler;
+    }
+
+    void FixedUpdate() {
+        var delta = Time.fixedDeltaTime;
+
+        cameraHandler.FollowTarget(delta);
+        cameraHandler.HandleCameraRotation(
+            delta, 
+            mouseX, 
+            mouseY
+        );
+    }
 
     public void OnEnable() {
         if (playerControls == null) {

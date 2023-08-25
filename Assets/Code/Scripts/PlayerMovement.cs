@@ -44,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
         
         moveDirection.Normalize();
 
+        moveDirection.y = 0;
+
         var speed = movementSpeed;
 
         moveDirection *= speed;
