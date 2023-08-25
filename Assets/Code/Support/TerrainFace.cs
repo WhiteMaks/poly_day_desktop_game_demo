@@ -59,6 +59,8 @@ public class TerrainFace
         var trianglesInLine = (resolution - 1) * 2;
         var triangles = new int[trianglesInLine * trianglesInLine * 3];
         var triangleIndex = 0;
+        
+        var uv = mesh.uv;
 
         for (int y = 0; y < resolution; y++) {
             for (int x = 0; x < resolution; x++) {
@@ -84,14 +86,36 @@ public class TerrainFace
 
         updateMesh(
             vertices,
-            triangles
+            triangles,
+            uv
         );
     }
 
-    private void updateMesh(Vector3[] vertices, int[] triangles) {
+    private void updateMesh(Vector3[] vertices, int[] triangles, Vector2[] uv) {
         mesh.Clear();
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
+        mesh.uv = uv;
+    }
+
+    public void UpdateUVs(ColorGenerator colorGenerator) {
+        var uv = new Vector2[resolution * resolution];
+
+        for (int y = 0; y < resolution; y++) {
+            for (int x = 0; x < resolution; x++) {
+                var index = x + y * resolution;
+                var percent = new Vector2(x, y) / (resolution - 1);
+                var pointOnCube = axisZ + (percent.x - 0.5f) * 2 * axisX + (percent.y - 0.5f) * 2 * axisY;
+                var pointOnSphere = pointOnCube.normalized;
+
+                uv[index] = new Vector2(
+                    colorGenerator.BiomePercentFromPoint(pointOnSphere), 
+                    0
+                );
+            }
+        }
+
+        mesh.uv = uv;
     }
 }

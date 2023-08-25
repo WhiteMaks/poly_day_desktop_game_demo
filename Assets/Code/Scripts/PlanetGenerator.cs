@@ -102,5 +102,9 @@ public class PlanetGenerator : MonoBehaviour
 
     private void GenerateColors() {
         colorGenerator.UpdateColors();
+
+        foreach (var terrainFace in terrainFaces) {
+            terrainFace.UpdateUVs(colorGenerator);
+        }
     }
 }
