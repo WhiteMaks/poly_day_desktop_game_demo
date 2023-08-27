@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: c1180e1abb3dc9b45ae9d04941e01d1b
+guid: 23d853d2bb93c01498301e2928e8248e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Alpha_Body_MAT
+    second: {fileID: 2100000, guid: c7e88e368f13a5747aba7437fdd4d08f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Alpha_Joints_MAT
+    second: {fileID: 2100000, guid: 2af1a9978de06cd44968550d785a569c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -78,7 +88,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 1
+  importAnimation: 0
   humanDescription:
     serializedVersion: 3
     human: []
